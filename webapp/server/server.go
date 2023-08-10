@@ -10,7 +10,8 @@ import (
 
 func Server() {
 	port := ":8080"
-	http.HandleFunc("/", handlers.HomeHandler)
+	http.HandleFunc("/", handlers.BaseHandler)
+	http.HandleFunc("/details", handlers.DetailsHandler)
 	fmt.Println("http://localhost:" + port[1:])
 	err := http.ListenAndServe(port, nil)
 	if errors.Is(err, http.ErrServerClosed) {
