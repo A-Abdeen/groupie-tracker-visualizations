@@ -1,0 +1,27 @@
+package gt 
+
+func Findimages (bandname string){
+idNumber--
+// type Images struct {
+//     Index []struct {
+//         Relation []string `json:"locations"`
+// 		dates string `json:"dates"`
+//     } `json:"index"`
+// }
+fullJson, err := http.Get("https://groupietrackers.herokuapp.com/api/"bandname".jpeg")
+if err != nil {
+	fmt.Print(err.Error())
+	os.Exit(1)
+}
+fullImagespage, err := ioutil.ReadAll(fullJson.Body)
+if err != nil {
+	log.Fatal(err)
+}
+var imageBuf bytes.Buffer
+err = jpeg.Encode(&imageBuf, target, nil)
+
+if err != nil {
+	log.Panic(err)
+}spage
+fmt.Println(fullImagespage)
+}

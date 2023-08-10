@@ -9,7 +9,7 @@ import (
 	"os"
 )
 
-func FindArtist(idNumber int, Whatisrequested string) Artists {
+func FindArtistDetails(idNumber int, Whatisrequested string) {
 	idNumber--
 
 	fullJson, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
@@ -48,7 +48,4 @@ func FindArtist(idNumber int, Whatisrequested string) Artists {
 	default:
 		fmt.Println("what is requested does not exist")
 	}
-
-	var x Artists
-	return x
 }

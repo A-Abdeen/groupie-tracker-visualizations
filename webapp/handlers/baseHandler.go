@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"gt/webapp/API"
 )
 
 func BaseHandler(w http.ResponseWriter, r *http.Request) {
@@ -20,5 +21,6 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(http.StatusOK)
 	io.WriteString(w, "This is my website!\n")
-	// TODO Add template execution
+	FullArtistsDetails := gt.FindArtistFullDetails(4)
+	fmt.Println(FullArtistsDetails)
 }
