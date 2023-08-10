@@ -1,7 +1,7 @@
 package main
 
-import "gt/webapp/server"
+import gt "gt/webapp/server"
 
-func main(){
-	gt.Printkk()
+func main() {
+	gt.Server()
 }
