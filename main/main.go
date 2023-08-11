@@ -5,6 +5,8 @@ import (
 	server "gt/webapp/server"
 )
 
+var Help []string
+
 func main() {
 	(gt.FindArtist(4, "Relations"))
 	(gt.FindArtist(4, "Locations"))

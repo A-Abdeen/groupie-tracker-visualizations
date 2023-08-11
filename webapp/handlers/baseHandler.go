@@ -2,7 +2,10 @@ package gt
 
 import (
 	"fmt"
+	API "gt/webapp/API"
+	"html/template"
 	"io"
+	"log"
 	"net/http"
 )
 
@@ -21,4 +24,11 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	io.WriteString(w, "This is my website!\n")
 	// TODO Add template execution
+
+	response := API.Artists{}
+	t, err := template.ParseFiles("../static/base.html")
+	if err != nil {
+		log.Fatal(err)
+	}
+	t.ExecuteTemplate(w, "base.html", response)
 }
