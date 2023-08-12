@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artist List</title>
+</head>
+<body>
+    <h1>Artist List</h1>
+    <ul>
+        {{range .}}
+        <li>
+            <strong>ID:</strong> {{.Id}}<br>
+            <strong>Name:</strong> {{.Name}}<br>
+            <strong>Image:</strong><br>
+            <img src="{{.Image}}" alt="{{.Name}}"><br>
+            <strong>Members:</strong> {{.Member}}<br>
+            <strong>Creation Date:</strong> {{.Creationdate}}<br>
+            <strong>First Album:</strong> {{.FirstAlbum}}<br>
+            <strong>Locations:</strong> {{.Locations}}<br>
+            <strong>Concert Dates:</strong> {{.ConcertDates}}<br>
+            <strong>Relations:</strong> {{.Relations}}<br>
+        </li>
+        {{end}}
+    </ul>
+</body>
+</html>

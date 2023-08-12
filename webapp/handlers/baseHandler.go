@@ -2,25 +2,37 @@ package gt
 
 import (
 	"fmt"
-	"io"
+	gt "gt/webapp/API"
+	"html/template"
 	"net/http"
 	"gt/webapp/API"
 )
 
 func BaseHandler(w http.ResponseWriter, r *http.Request) {
+
 	fmt.Println("BaseHandler is called.")
+
 	// Verify Request Method
 	if r.Method != "GET" {
-		ErrorHandler(w, r, http.StatusMethodNotAllowed)
+		http.Error(w, "Method Not Allowed", http.StatusMethodNotAllowed)
 		return
 	}
+
 	// Verify Request Path
 	if r.URL.Path != "/" {
-		ErrorHandler(w, r, http.StatusNotFound)
+		http.Error(w, "Not Found", http.StatusNotFound)
 		return
 	}
+
+	Artists := gt.LoadArtist()
+	t, err := template.ParseFiles("../templates/index.html")
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		fmt.Println(err.Error())
+		return
+	}
+
 	w.WriteHeader(http.StatusOK)
 	io.WriteString(w, "This is my website!\n")
-	FullArtistsDetails := gt.FindArtistFullDetails(4)
-	fmt.Println(FullArtistsDetails)
+	// TODO Add template execution
 }
