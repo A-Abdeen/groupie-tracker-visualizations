@@ -6,14 +6,7 @@
 <body>
     <h1>Artist List</h1>
     <ul>
-        {{range .}}
         <li>
-            <form class="form" method="GET" action="/details">
-            <button id= "idNumber" name="idNumber" value="{{.Id}}" >{{.Name}}</button></form>
-            <strong>Name:</strong> {{.Name}}<br>
-            <strong>Image:</strong><br>
-            <img src="{{.Image}}" alt="{{.Name}}"><br>
-            <!-- <strong>ID:</strong> {{.Id}}<br>
             <strong>Name:</strong> {{.Name}}<br>
             <strong>Image:</strong><br>
             <img src="{{.Image}}" alt="{{.Name}}"><br>
@@ -22,9 +15,8 @@
             <strong>First Album:</strong> {{.FirstAlbum}}<br>
             <strong>Locations:</strong> {{.Locations}}<br>
             <strong>Concert Dates:</strong> {{.ConcertDates}}<br>
-            <strong>Relations:</strong> {{.Relations}}<br> -->
+            <strong>Relations:</strong> {{.Relations}}<br>
         </li>
-        {{end}}
     </ul>
 </body>
 </html>

@@ -40,7 +40,7 @@ func FindArtistDetails(idNumber int, Whatisrequested string) {
 	case Whatisrequested == "FirstAlbum":
 		fmt.Println(individualArtists[idNumber].FirstAlbum)
 	case Whatisrequested == "Locations":
-		Locations((idNumber + 1))
+		Locations(3)
 	case Whatisrequested == "Dates":
 		Dates((idNumber + 1))
 	case Whatisrequested == "Relations":

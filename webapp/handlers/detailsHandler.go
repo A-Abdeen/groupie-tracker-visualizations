@@ -2,8 +2,11 @@ package gt
 
 import (
 	"fmt"
-	"io"
+	"html/template"
 	"net/http"
+	gt "gt/webapp/API"
+	"strconv"
+	// "io"
 )
 
 func DetailsHandler(w http.ResponseWriter, r *http.Request) {
@@ -18,6 +21,16 @@ func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
+
+	idNumber,_ := strconv.Atoi(r.FormValue("idNumber"))
+	ArtistsDetails := gt.FindArtistFullDetails(idNumber)
+	t, err := template.ParseFiles("../templates/details.html")
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		fmt.Println(err.Error())
+		return
+	}
 	w.WriteHeader(http.StatusOK)
-	io.WriteString(w, "This is to display details!\n")
+	t.Execute(w, ArtistsDetails)
 }
+

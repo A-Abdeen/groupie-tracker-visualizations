@@ -11,7 +11,6 @@ import (
 
 func FindArtistFullDetails(idNumber int) Artists{
 	idNumber--
-
 	fullJson, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
 		fmt.Print(err.Error())
@@ -26,6 +25,5 @@ func FindArtistFullDetails(idNumber int) Artists{
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	
 	return AllArtistsDetails[idNumber]
 }
