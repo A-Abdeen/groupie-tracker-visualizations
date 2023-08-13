@@ -4,29 +4,25 @@ import (
 	"fmt"
 	API "gt/webapp/API"
 	"html/template"
-	"io"
 	"log"
 	"net/http"
 )
 
 func BaseHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("BaseHandler is called.")
+	fmt.Println("BaseHandler is called.") // XXX
 	// Verify Request Method
 	if r.Method != "GET" {
 		ErrorHandler(w, r, http.StatusMethodNotAllowed)
 		return
 	}
-	// Verify Request Path
+	// Verify Request Pattern (Path)
 	if r.URL.Path != "/" {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	io.WriteString(w, "This is my website!\n")
-	// TODO Add template execution
-
-	response := API.Artists{}
-	t, err := template.ParseFiles("../static/base.html")
+	response := API.Artists{} // TODO Pass required details
+	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
 		log.Fatal(err)
 	}

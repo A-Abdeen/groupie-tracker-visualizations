@@ -20,10 +20,10 @@ func Dates(idNumber int) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var individualDates TmpLocations
+	var individualDates TmpDates
 	err2 := json.Unmarshal(fullDatespage, &individualDates)
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	fmt.Println(individualDates.Index[idNumber])
+	//fmt.Println(individualDates.Index[idNumber])  // XXX
 }

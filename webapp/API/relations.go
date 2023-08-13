@@ -26,5 +26,5 @@ func Relations(idNumber int) {
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	fmt.Println(individualRelations.Index[idNumber])
+	// fmt.Println(individualRelations.Index[idNumber]) // XXX
 }

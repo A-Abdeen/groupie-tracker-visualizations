@@ -26,5 +26,5 @@ func Locations(idNumber int) {
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	fmt.Println(individualLocations.Index[idNumber])
+	// fmt.Println(individualLocations.Index[idNumber]) // XXX
 }

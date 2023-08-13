@@ -9,8 +9,8 @@ import (
 )
 
 func Server() {
-	// Assigned portal (change if needed)
-	port := ":8080"
+	// Assigned portal
+	const port = ":8080" // Change if needed
 	// Serve the css directory to make it available for html
 	css := http.FileServer(http.Dir("../static/css"))
 	http.Handle("/css/", http.StripPrefix("/css/", css))
@@ -18,7 +18,7 @@ func Server() {
 	http.HandleFunc("/", handlers.BaseHandler)
 	http.HandleFunc("/details", handlers.DetailsHandler)
 	// Run the server
-	fmt.Println("http://localhost:" + port[1:])
+	fmt.Println("http://localhost" + port)
 	err := http.ListenAndServe(port, nil)
 	if errors.Is(err, http.ErrServerClosed) {
 		fmt.Printf("We closed the server? \n")
@@ -27,5 +27,3 @@ func Server() {
 		log.Fatal(err)
 	}
 }
-
-// Files needed to for parsing templates

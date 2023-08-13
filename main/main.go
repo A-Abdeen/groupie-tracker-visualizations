@@ -2,10 +2,9 @@ package main
 
 import (
 	gt "gt/webapp/API"
+	handlers "gt/webapp/handlers"
 	server "gt/webapp/server"
 )
-
-var Help []string
 
 func main() {
 	(gt.FindArtist(4, "Relations"))
@@ -14,5 +13,9 @@ func main() {
 	(gt.Relations(4))
 	(gt.Locations(4))
 	(gt.Dates(4))
+	// Initialize html & tmpl global array for all handlers
+	if handlers.HtmlTmpl == nil {
+		handlers.Init()
+	}
 	server.Server()
 }

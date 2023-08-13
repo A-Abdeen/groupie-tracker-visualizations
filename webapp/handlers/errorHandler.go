@@ -2,12 +2,13 @@ package gt
 
 import (
 	"fmt"
-	// "io"
+	"html/template"
+	"log"
 	"net/http"
 )
 
 func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
-	fmt.Println("ErrorHandler is called.")
+	fmt.Println("ErrorHandler is called.") // XXX
 	var errorMsg string
 	switch {
 	case statusCode == 400:
@@ -25,20 +26,17 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
 	default:
 		errorMsg = "UNFAMILIAR ERROR WHAT DIS :("
 	}
-	errorResponse := Err{false, errorMsg, statusCode}
-	http.Error(w, errorResponse.Msg, errorResponse.StatusCode)
-	/*
-		TODO test how to implement executing templates
-
-		w.WriteHeader(errorResponse.StatusCode)
-		io.WriteString(w, "This is to display errors!\n")
-	*/
+	errorResponse := Err{true, errorMsg, statusCode}
+	t, err := template.ParseFiles(HtmlTmpl...)
+	if err != nil {
+		log.Fatal(err)
+	}
+	t.ExecuteTemplate(w, "error.html", errorResponse)
 
 }
 
-// TODO MOVE TO STRUCTS FOLDER LATER
 type Err struct {
-	IsNil      bool
+	IsErr      bool
 	Msg        string
 	StatusCode int
 }
