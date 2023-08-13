@@ -4,7 +4,6 @@ import (
 	"fmt"
 	API "gt/webapp/API"
 	"html/template"
-	"log"
 	"net/http"
 )
 
@@ -20,11 +19,13 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	response := API.Artists{} // TODO Pass required details
+	Artists := API.LoadArtist()
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
-		log.Fatal(err)
+		ErrorHandler(w, r, http.StatusInternalServerError)
+		fmt.Println(err.Error()) // XXX
+		return
 	}
-	t.ExecuteTemplate(w, "base.html", response)
+	w.WriteHeader(http.StatusOK)
+	t.ExecuteTemplate(w, "base.html", Artists)
 }

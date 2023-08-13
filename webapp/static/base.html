@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Artist List</title>
 </head>
 <body>
-    <h1>List of Artists Here</h1>
+    <h1>Artist List</h1>
+    <ul>
+        {{range .}}
+        <li>
+            <form class="form" method="GET" action="/details">
+            <button id= "idNumber" name="idNumber" value="{{.Id}}" >{{.Name}}</button></form>
+            <strong>Name:</strong> {{.Name}}<br>
+            <strong>Image:</strong><br>
+            <img src="{{.Image}}" alt="{{.Name}}"><br>
+            <!-- <strong>ID:</strong> {{.Id}}<br>
+            <strong>Name:</strong> {{.Name}}<br>
+            <strong>Image:</strong><br>
+            <img src="{{.Image}}" alt="{{.Name}}"><br>
+            <strong>Members:</strong> {{.Member}}<br>
+            <strong>Creation Date:</strong> {{.Creationdate}}<br>
+            <strong>First Album:</strong> {{.FirstAlbum}}<br>
+            <strong>Locations:</strong> {{.Locations}}<br>
+            <strong>Concert Dates:</strong> {{.ConcertDates}}<br>
+            <strong>Relations:</strong> {{.Relations}}<br> -->
+        </li>
+        {{end}}
+    </ul>
 </body>
 </html>

@@ -20,8 +20,8 @@ type TmpAllConRel struct {
 
 type TmpLocations struct {
 	Index []struct {
-		Locations []string `json:"locations"`
-		Dates     string   `json:"dates"`
+		LocationsDetailed []string `json:"locations"`
+		DatesDetailed     string   `json:"dates"`
 	} `json:"index"`
 }
 
@@ -30,3 +30,4 @@ type TmpDates struct {
 		Dates []string `json:"dates"`
 	} `json:"index"`
 }
+

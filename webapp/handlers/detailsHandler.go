@@ -4,8 +4,8 @@ import (
 	"fmt"
 	API "gt/webapp/API"
 	"html/template"
-	"log"
 	"net/http"
+	"strconv"
 )
 
 func DetailsHandler(w http.ResponseWriter, r *http.Request) {
@@ -20,11 +20,15 @@ func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
-	w.WriteHeader(http.StatusOK)
-	response := API.Artists{} // TODO Pass required details
+
+	idNumber, _ := strconv.Atoi(r.FormValue("idNumber"))
+	ArtistsDetails := API.FindArtistFullDetails(idNumber)
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
-		log.Fatal(err)
+		ErrorHandler(w, r, http.StatusInternalServerError)
+		fmt.Println(err.Error()) // XXX
+		return
 	}
-	t.ExecuteTemplate(w, "details.html", response)
+	w.WriteHeader(http.StatusOK)
+	t.ExecuteTemplate(w, "details.html", ArtistsDetails)
 }
