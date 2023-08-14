@@ -31,3 +31,16 @@ type TmpDates struct {
 	} `json:"index"`
 }
 
+type Err struct {
+	IsErr      bool
+	Msg        string
+	StatusCode int
+}
+
+type WebHandler struct {
+	*Artists
+	Locations *TmpLocations
+	Dates     *TmpDates
+	Relations *TmpAllConRel
+	*Err
+}
