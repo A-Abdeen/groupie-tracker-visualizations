@@ -37,10 +37,29 @@ type Err struct {
 	StatusCode int
 }
 
+/*
+	Below struct is known as struct composition
+	(or struct embedding)
+	Allows using single struct to access all resources
+	Checkout PassError method below
+	Next step: adding stuct methods for specific handlers
+*/
+
 type WebHandler struct {
 	*Artists
 	Locations *TmpLocations
 	Dates     *TmpDates
 	Relations *TmpAllConRel
 	*Err
+}
+
+func (w WebHandler) PassError(x string, y int) WebHandler {
+	errorResponse := WebHandler{
+		Err: &Err{
+			IsErr:      true,
+			Msg:        x,
+			StatusCode: y,
+		},
+	}
+	return errorResponse
 }

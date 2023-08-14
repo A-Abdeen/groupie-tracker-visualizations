@@ -27,13 +27,8 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
 	default:
 		errorMsg = "UNFAMILIAR ERROR WHAT DIS :("
 	}
-	errorResponse := API.WebHandler{
-		Err: &API.Err{
-			IsErr:      true,
-			Msg:        errorMsg,
-			StatusCode: statusCode,
-		},
-	}
+	var errorResponse API.WebHandler
+	errorResponse = errorResponse.PassError(errorMsg, statusCode)
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
 		log.Fatal(err)

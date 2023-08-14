@@ -6,6 +6,15 @@ import (
 	"strings"
 )
 
+/*
+The function below is meant to create a URL friendly string from artist names
+to be used for the detail page, and others when necessary
+e.g.
+
+	Maroon 5 -> maroon-5
+	AC/DC -> acdc
+	J. Cole -> j-cole
+*/
 func Slug(input string) string {
 	var output string
 
