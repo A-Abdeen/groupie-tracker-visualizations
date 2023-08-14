@@ -2,6 +2,7 @@ package gt
 
 import (
 	"fmt"
+	API "gt/webapp/API"
 	"html/template"
 	"log"
 	"net/http"
@@ -26,17 +27,17 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
 	default:
 		errorMsg = "UNFAMILIAR ERROR WHAT DIS :("
 	}
-	errorResponse := Err{true, errorMsg, statusCode}
+	errorResponse := API.WebHandler{
+		Err: &API.Err{
+			IsErr:      true,
+			Msg:        errorMsg,
+			StatusCode: statusCode,
+		},
+	}
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
 		log.Fatal(err)
 	}
 	t.ExecuteTemplate(w, "error.html", errorResponse)
 
-}
-
-type Err struct {
-	IsErr      bool
-	Msg        string
-	StatusCode int
 }

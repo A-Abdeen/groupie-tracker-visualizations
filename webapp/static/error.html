@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>ERROR PAGE</h1>
+    <h1>ERROR {{ .Err.StatusCode }}</h1>
+    <h2>{{ .Err.Msg }}</h2>
 </body>
 </html>
