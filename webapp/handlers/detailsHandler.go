@@ -16,12 +16,12 @@ func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Verify Request Pattern (Path)
-	if r.URL.Path != "/details" {
+	if r.URL.Path != "/details/" {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
-
-	idNumber, _ := strconv.Atoi(r.FormValue("idNumber"))
+	idParam := r.URL.Query().Get("id")
+	idNumber, _ := strconv.Atoi(idParam)
 	ArtistsDetails := API.FindArtistFullDetails(idNumber)
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {

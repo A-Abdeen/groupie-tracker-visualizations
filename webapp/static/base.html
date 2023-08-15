@@ -2,29 +2,21 @@
 <html>
 <head>
     <title>Artist List</title>
+    <link rel="stylesheet" type="text/css" href="./css/base.css">
 </head>
 <body>
     <h1>Artist List</h1>
-    <ul>
+    <div class="artists-container">
         {{range .}}
-        <li>
-            <form class="form" method="GET" action="/details">
-            <button id= "idNumber" name="idNumber" value="{{.Id}}" >{{.Name}}</button></form>
-            <strong>Name:</strong> {{.Name}}<br>
-            <strong>Image:</strong><br>
-            <img src="{{.Image}}" alt="{{.Name}}"><br>
-            <!-- <strong>ID:</strong> {{.Id}}<br>
-            <strong>Name:</strong> {{.Name}}<br>
-            <strong>Image:</strong><br>
-            <img src="{{.Image}}" alt="{{.Name}}"><br>
-            <strong>Members:</strong> {{.Member}}<br>
-            <strong>Creation Date:</strong> {{.Creationdate}}<br>
-            <strong>First Album:</strong> {{.FirstAlbum}}<br>
-            <strong>Locations:</strong> {{.Locations}}<br>
-            <strong>Concert Dates:</strong> {{.ConcertDates}}<br>
-            <strong>Relations:</strong> {{.Relations}}<br> -->
-        </li>
+        <div class="artist-card">
+            <a href="/details?id={{.Id}}">
+                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image">
+            </a>
+            <div class="artist-info">
+                <strong>Name:</strong> {{.Name}}
+            </div>
+        </div>
         {{end}}
-    </ul>
+    </div>
 </body>
 </html>

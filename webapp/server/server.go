@@ -12,11 +12,11 @@ func Server() {
 	// Assigned portal
 	const port = ":8080" // Change if needed
 	// Serve the css directory to make it available for html
-	css := http.FileServer(http.Dir("../static/css"))
-	http.Handle("/css/", http.StripPrefix("/css/", css))
+	styles := http.FileServer(http.Dir("../webapp/static/css"))
+	http.Handle("/css/", http.StripPrefix("/css/", styles))
 	// Main Request Handlers
 	http.HandleFunc("/", handlers.BaseHandler)
-	http.HandleFunc("/details", handlers.DetailsHandler)
+	http.HandleFunc("/details/", handlers.DetailsHandler)
 	// Run the server
 	fmt.Println("http://localhost" + port)
 	err := http.ListenAndServe(port, nil)

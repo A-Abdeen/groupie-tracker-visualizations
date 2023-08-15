@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #1db954; /* Spotify green color */
+    margin-top: 20px;
+}
+
+.artists-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 20px;
+}
+
+.artist-card {
+    width: 200px;
+    margin: 15px;
+    border: 1px solid #e1e1e1;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 5px;
+    overflow: hidden;
+    text-align: center;
+}
+
+.artist-image {
+    width: 100%;
+    height: auto;
+}
+
+.artist-info {
+    padding: 10px;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+}
+
+
