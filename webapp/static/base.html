@@ -1,22 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Artist List</title>
+    <title>Groupie</title>
     <link rel="stylesheet" type="text/css" href="./css/base.css">
 </head>
+
 <body>
-    <h1>Artist List</h1>
-    <div class="artists-container">
+    <header class="cool-header">
+        <h1>Groupie Tracker</h1>
+    </header>
+    <main class="artists-container">
         {{range .}}
-        <div class="artist-card">
-            <a href="/details?id={{.Id}}">
-                <img src="{{.Image}}" alt="{{.Name}}" class="artist-image">
-            </a>
-            <div class="artist-info">
-                <strong>Name:</strong> {{.Name}}
+        <a href="/details?id={{.Id}}" class="artist-card">
+            <div class="artist-image">
+                <img src="{{.Image}}" alt="{{.Name}}">
             </div>
-        </div>
+            <div class="artist-info">
+                {{.Name}}
+            </div>
+        </a>
         {{end}}
-    </div>
+    </main>
 </body>
+
 </html>
