@@ -1,5 +1,4 @@
 package gt
-
 type Artists struct {
 	Id           int      `json:"id"`
 	Image        string   `json:"image"`
@@ -7,36 +6,31 @@ type Artists struct {
 	Member       []string `json:"members"`
 	Creationdate int      `json:"creationDate"`
 	FirstAlbum   string   `json:"firstAlbum"`
-	Locations    string   `json:"locations"`
-	ConcertDates string   `json:"concertDates"`
-	Relations    string   `json:"relations"`
+	Relations    map[string][]string
+	Locations    []string
+	Dates        []string
 }
-
 type TmpAllConRel struct {
 	Index []struct {
 		Relation map[string][]string `json:"datesLocations"`
 	} `json:"index"`
 }
-
 type TmpLocations struct {
 	Index []struct {
 		LocationsDetailed []string `json:"locations"`
 		DatesDetailed     string   `json:"dates"`
 	} `json:"index"`
 }
-
 type TmpDates struct {
 	Index []struct {
 		Dates []string `json:"dates"`
 	} `json:"index"`
 }
-
 type Err struct {
 	IsErr      bool
 	Msg        string
 	StatusCode int
 }
-
 /*
 	Below struct is known as struct composition
 	(or struct embedding)
@@ -44,7 +38,6 @@ type Err struct {
 	Checkout PassError method below
 	Next step: adding stuct methods for specific handlers
 */
-
 type WebHandler struct {
 	*Artists
 	Locations *TmpLocations
@@ -52,7 +45,6 @@ type WebHandler struct {
 	Relations *TmpAllConRel
 	*Err
 }
-
 func (w WebHandler) PassError(x string, y int) WebHandler {
 	errorResponse := WebHandler{
 		Err: &Err{

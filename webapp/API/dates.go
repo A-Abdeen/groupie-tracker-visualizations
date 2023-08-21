@@ -1,5 +1,4 @@
 package gt
-
 import (
 	"encoding/json"
 	"fmt"
@@ -8,9 +7,7 @@ import (
 	"net/http"
 	"os"
 )
-
-func Dates(idNumber int) {
-	idNumber--
+func Dates(idNumber int) []string{ 
 	fullJso, err := http.Get("https://groupietrackers.herokuapp.com/api/dates")
 	if err != nil {
 		fmt.Print(err.Error())
@@ -25,5 +22,6 @@ func Dates(idNumber int) {
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	//fmt.Println(individualDates.Index[idNumber])  // XXX
+	detailsPageDates := individualDates.Index[idNumber]
+	return (detailsPageDates.Dates)
 }

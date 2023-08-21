@@ -9,13 +9,13 @@
         <li>
             <strong>Name:</strong> {{.Name}}<br>
             <strong>Image:</strong><br>
-            <img src="{{.Image}}" alt="{{.Name}}"><br>
-            <strong>Members:</strong> {{.Member}}<br>
-            <strong>Creation Date:</strong> {{.Creationdate}}<br>
-            <strong>First Album:</strong> {{.FirstAlbum}}<br>
-            <strong>Locations:</strong> {{.Locations}}<br>
-            <strong>Concert Dates:</strong> {{.ConcertDates}}<br>
-            <strong>Relations:</strong> {{.Relations}}<br>
+            <img src="{{.Image}}" alt="{{.Name}}"><br><strong>Members:</strong>
+            {{range .Member}}<pre style="font-size:25px">{{.}}</pre>{{end}}
+            <strong>Creation Date:</strong> {{.Creationdate}}
+            <strong>First Album:</strong> {{.FirstAlbum}}
+            <strong>Locations:</strong> {{.Locations}}
+            <strong>Concert Dates:</strong> {{.Dates}}
+            <strong>Relations:</strong> {{.Relations}}
         </li>
     </ul>
 </body>

@@ -2,7 +2,7 @@ package gt
 
 import (
 	"fmt"
-	API "gt/webapp/API"
+	// API "gt/webapp/API"
 	"html/template"
 	"net/http"
 )
@@ -19,7 +19,6 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
-	Artists := API.LoadArtist()
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
 		ErrorHandler(w, r, http.StatusInternalServerError)
@@ -27,5 +26,5 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "base.html", Artists)
+	t.ExecuteTemplate(w, "base.html", APIcall)
 }

@@ -2,6 +2,7 @@ package gt
 
 import (
 	"fmt"
+	API "gt/webapp/API"
 )
 
 /*
@@ -11,7 +12,7 @@ at a global scope.
 */
 
 var HtmlTmpl []string
-
+var APIcall []API.Artists
 func Init() {
 	fmt.Println("Initializing Global Variable") // XXX
 	HtmlTmpl = []string{
@@ -21,4 +22,5 @@ func Init() {
 		// Add new html / template names here
 	}
 	fmt.Println("Global Variable initialized") // XXX
+	APIcall = API.LoadArtist()
 }

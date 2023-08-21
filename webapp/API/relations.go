@@ -1,5 +1,4 @@
 package gt
-
 import (
 	"encoding/json"
 	"fmt"
@@ -8,10 +7,7 @@ import (
 	"net/http"
 	"os"
 )
-
-func Relations(idNumber int) {
-	idNumber--
-
+func Relations(idNumber int) map[string][]string {
 	fullJso, err := http.Get("https://groupietrackers.herokuapp.com/api/relation")
 	if err != nil {
 		fmt.Print(err.Error())
@@ -26,5 +22,6 @@ func Relations(idNumber int) {
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	// fmt.Println(individualRelations.Index[idNumber]) // XXX
+	detailsPageRelations := individualRelations.Index[idNumber]
+	return (detailsPageRelations.Relation)
 }
