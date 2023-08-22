@@ -2,7 +2,7 @@
 body {
     font-family: 'Arial', sans-serif;
     background-color: #686868; /* dark background */
-    color: #D4AF37; /* Light gray color */
+    color: #dab744; /* Light gray color */
     margin: 0;
     padding: 0;
 }
@@ -60,7 +60,7 @@ a {
     background: #282828; /* Slightly lighter than body background */
     padding: 10px;
     text-align: center;
-    font-size: 18px;
-    font-weight: 500;
+    font-size: 26px;
+    font-weight: 900;
     margin-top: 10px;
 }

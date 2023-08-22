@@ -1,22 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Artist List</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARTIST</title>
+    <link rel="stylesheet" type="text/css" href="./css/details.css">
+
 </head>
+<style>
+.cool-header {
+    background-color: #000000; 
+    padding: 20px 0;
+    text-align: center;
+    font-size: 24px;
+}
+body {
+    font-size: 32px;
+    font-family: 'Arial', sans-serif;
+    background-color: #686868; /* dark background */
+    /* Light gray color */
+    color: #dab744; /* Light gray color */
+    margin: 0;
+    padding: 0;
+}
+strong {
+    border-radius: 8px;
+    background: #282828; /* Slightly lighter than body background */
+    padding: 10px;
+    text-align: center;
+    font-size: 30px;
+    font-weight: 500;
+    margin-top: 10px;
+}
+</style>
+
 <body>
-    <h1>Artist List</h1>
+    <header class="cool-header">
+        <h1>Artist Details</h1>
+    </header>
     <ul>
-        <li>
-            <strong>Name:</strong> {{.Name}}<br>
-            <strong>Image:</strong><br>
-            <img src="{{.Image}}" alt="{{.Name}}"><br><strong>Members:</strong>
-            {{range .Member}}<pre style="font-size:25px">{{.}}</pre>{{end}}
-            <strong>Creation Date:</strong> {{.Creationdate}}
-            <strong>First Album:</strong> {{.FirstAlbum}}
-            <strong>Locations:</strong> {{.Locations}}
-            <strong>Concert Dates:</strong> {{.Dates}}
-            <strong>Relations:</strong> {{.Relations}}
-        </li>
+
+            <strong>Name:</strong><br><br>{{.Name}}<br><br>
+            <strong>Image:</strong><br><br>
+            <img src="{{.Image}}" alt="{{.Name}}"><br><br><strong>Members:</strong><br>
+            {{range .Member}}<br><li>{{.}}{{end}}<br></li><br>
+            <strong>Creation Date:</strong><br><br>
+            {{.Creationdate}}<br><br>
+            <strong>First Album:</strong><br><br>
+             {{.FirstAlbum}}<br><br>
+            <strong>Dates and locations:</strong><br><br>
+            {{range .Relations}}<li>{{.}}<br><br></li>{{end}}
+
     </ul>
 </body>
 </html>
