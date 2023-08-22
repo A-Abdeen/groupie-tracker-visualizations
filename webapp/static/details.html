@@ -22,6 +22,7 @@ body {
     color: #dab744; /* Light gray color */
     margin: 0;
     padding: 0;
+    /* text-align: center; */
 }
 strong {
     border-radius: 8px;
@@ -32,6 +33,38 @@ strong {
     font-weight: 500;
     margin-top: 10px;
 }
+div {
+  position: relative;
+}
+input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+
+label {
+  cursor: pointer;
+}
+label {
+  position: relative;
+  display: block;
+  padding-left: 5px;
+  font-family: "Spicy Rice", cursive;
+}
+h5 {
+  max-height: 0;
+  overflow: hidden;
+  padding-left: 30px;
+  transition: max-height 0.4s ease;
+  font-family: "Habibi", serif;
+}
+input[type="checkbox"]:checked ~ h3 ~ h5 {
+  max-height: 800px;
+}
+
 </style>
 
 <body>
@@ -40,11 +73,15 @@ strong {
     </header>
     <ul>
 
-            <strong>Name:</strong><br><br>{{.Name}}<br><br>
-            <strong>Image:</strong><br><br>
-            <img src="{{.Image}}" alt="{{.Name}}"><br><br><strong>Members:</strong><br>
-            {{range .Member}}<br><li>{{.}}{{end}}<br></li><br>
-            <strong>Creation Date:</strong><br><br>
+            <strong>Name:</strong><br><br>{{.Name}}
+            <img src="{{.Image}}" alt="{{.Name}}">
+            <div>
+                <input type="checkbox" id="mem">
+                <h3><label for="mem">Members:</label></h3>
+                <h5>{{range .Member}}{{.}}{{end}}</h5>
+                </div>
+            
+                <strong>Creation Date:</strong><br><br>
             {{.Creationdate}}<br><br>
             <strong>First Album:</strong><br><br>
              {{.FirstAlbum}}<br><br>
