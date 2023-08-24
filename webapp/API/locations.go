@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 )
 func Locations(idNumber int) []string{
 	fullJso, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
@@ -22,7 +23,14 @@ func Locations(idNumber int) []string{
 	if err2 != nil {
 		fmt.Print(err2)
 	}
+	var locations []string
 	detailsPageLocations := individualLocations.Index[idNumber]
-	return (detailsPageLocations.LocationsDetailed)
+	for _, data := range detailsPageLocations.LocationsDetailed {
+		data = strings.ReplaceAll(data, "-", ", ")
+		data = strings.ReplaceAll(data, "_", " ")
+		data = strings.Title(data)
+		locations = append(locations, data)
+	}
+	return (locations)
 }
 

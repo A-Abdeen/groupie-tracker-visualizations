@@ -23,9 +23,11 @@ func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 	idParam := r.URL.Query().Get("id")
 	idNumber, _ := strconv.Atoi(idParam)
 	idNumber--
-	var DisplayDetails API.Artists
-	DisplayDetails = APIcall[idNumber]
+	DisplayDetails := APIcall[idNumber]
+	DisplayDetails.Locations = API.Locations(idNumber)
+	DisplayDetails.Dates = API.Dates(idNumber)
 	DisplayDetails.Relations = API.Relations(idNumber)
+	DisplayDetails.Member = API.Arrangestring(DisplayDetails.Member)
 	t, err := template.ParseFiles(HtmlTmpl...)
 	if err != nil {
 		ErrorHandler(w, r, http.StatusInternalServerError)
