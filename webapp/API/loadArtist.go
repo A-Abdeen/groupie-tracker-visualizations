@@ -23,7 +23,7 @@ func LoadArtist() []Artists {
 	var individualArtists []Artists
 	err2 := json.Unmarshal(fullArtistpage, &individualArtists)
 	if err2 != nil {
-		fmt.Print(err2)
+		fmt.Print("")
 	}
 	return individualArtists
 }

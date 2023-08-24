@@ -20,8 +20,13 @@ func DetailsHandler(w http.ResponseWriter, r *http.Request) {
 		ErrorHandler(w, r, http.StatusNotFound)
 		return
 	}
+
 	idParam := r.URL.Query().Get("id")
 	idNumber, _ := strconv.Atoi(idParam)
+	if idNumber == 0 || idNumber > 52{
+		ErrorHandler(w, r, http.StatusNotFound)
+		return
+	}
 	idNumber--
 	DisplayDetails := APIcall[idNumber]
 	DisplayDetails.Locations = API.Locations(idNumber)
