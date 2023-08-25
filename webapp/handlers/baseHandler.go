@@ -26,5 +26,5 @@ func BaseHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	w.WriteHeader(http.StatusOK)
-	t.ExecuteTemplate(w, "base.html", APIcall)
+	t.ExecuteTemplate(w, "base.html", APIcall) // execution of all artists details to be presented in the homepage using base.html
 }

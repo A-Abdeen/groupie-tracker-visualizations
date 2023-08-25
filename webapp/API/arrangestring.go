@@ -11,6 +11,5 @@ func Arrangestring(array []string) []string {
 
 	}
 	array = Member
-	// fmt.Println(array)
 	return array
 }

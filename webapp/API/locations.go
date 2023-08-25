@@ -18,12 +18,12 @@ func Locations(idNumber int) []string{
 	if err != nil {
 		log.Fatal(err)
 	}
-	var individualLocations TmpLocations
+	var individualLocations TmpLocations //struct created to be able to unmarshal the full data for locations from above URL
 	err2 := json.Unmarshal(fullLocationspage, &individualLocations)
 	if err2 != nil {
 		fmt.Print(err2)
 	}
-	var locations []string
+	var locations []string // locations created so that to be able to add indivitualLocations to DisplayDetails 
 	detailsPageLocations := individualLocations.Index[idNumber]
 	for _, data := range detailsPageLocations.LocationsDetailed {
 		data = strings.ReplaceAll(data, "-", ", ")

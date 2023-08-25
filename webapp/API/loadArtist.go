@@ -11,7 +11,7 @@ import (
 
 func LoadArtist() []Artists {
 
-	fullJson, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+	fullJson, err := http.Get("https://groupietrackers.herokuapp.com/api/artists") 
 	if err != nil {
 		fmt.Print(err.Error())
 		os.Exit(1)
@@ -20,10 +20,10 @@ func LoadArtist() []Artists {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var individualArtists []Artists
-	err2 := json.Unmarshal(fullArtistpage, &individualArtists)
+	var individualArtists []Artists //struct created to be able to unmarshal the full data for artists from above URL
+	err2 := json.Unmarshal(fullArtistpage, &individualArtists) 
 	if err2 != nil {
 		fmt.Print("")
 	}
-	return individualArtists
+	return individualArtists // variable has all the artists data to be displayed in the homepage
 }

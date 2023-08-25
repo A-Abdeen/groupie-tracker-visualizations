@@ -12,7 +12,9 @@
     </header>
     <main class="artists-container">
         {{range .}}
+        <!-- range over APIcall to get present the name and images -->
         <a href="/details?id={{.Id}}" class="artist-card">
+            <!-- the a command turns the image along with the name to a url that is clickable -->
             <div class="artist-image">
                 <img src="{{.Image}}" alt="{{.Name}}">
             </div>

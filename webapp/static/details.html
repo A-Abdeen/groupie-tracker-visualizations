@@ -9,7 +9,7 @@
 </head>
 <style>
 .cool-header {
-    background-color: #000000; 
+    background-color: #000000; /* header used same as the one in the homepage but with the artist name*/
     padding: 10px 0;
 }
 body {
@@ -19,7 +19,7 @@ body {
     color: #dab744; 
     font-family: "Spicy Rice", cursive;
 }
-input[type="checkbox"] {
+input[type="checkbox"] {  /*check box expands when clicked but kept hidden*/
   position: fixed;
   top: 0;
   left: 0;
@@ -36,7 +36,6 @@ h5 {
   text-align: center;
   font-size: 48px;
   font-weight: bolder;
-
 }
 input[type="checkbox"]:checked ~ h3 ~ h5 {
   max-height: 2000px;
@@ -50,14 +49,22 @@ label {
     border-radius: 8px;
     cursor: pointer;
 }
+label:hover{
+  color:#282828;
+  background-color:#dab744;
+}
+label:active{
+  opacity: 0.5;
+  transition: 0.2s;
+}
 </style>
 <body>
     <header class="cool-header">
-        <h2>{{.Name}}</h2>
+        <h2>{{.Name}}</h2><!--header used same as the one in the homepage but with the artist name -->   
             <img src="{{.Image}}" alt="{{.Name}}"></div>
     </header>
-    <div>            
-    <input type="checkbox" id="mem">
+    <div>            <!-- checkedbox used for each detail so that the user selects the data he wants -->  
+    <input type="checkbox" id="mem">  
                 <h3><label for="mem">Members</label></h3>
                 <h5>{{range .Member}}<br>{{.}}{{end}}</h5></div>
                 <div><input type="checkbox" id="cre">

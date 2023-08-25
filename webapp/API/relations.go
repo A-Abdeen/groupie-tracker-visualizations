@@ -18,28 +18,28 @@ func Relations(idNumber int) []string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	var individualRelations TmpAllConRel
-	var dateAndLocation []string
+	var individualRelations TmpAllConRel //struct created to be able to unmarshal the full data for relations from above URL
+	var dateAndLocation []string  // dateAndLocation created so that to be able to add indivitualRelations to DisplayDetails 
 	var oneDateandLocation string
 	var dates string
-	err2 := json.Unmarshal(fullRelationspage, &individualRelations)
+	err2 := json.Unmarshal(fullRelationspage, &individualRelations) 
 	if err2 != nil {
 		fmt.Print(err2)
 	}
 	detailsPageRelations := individualRelations.Index[idNumber]
-	for idx, data := range detailsPageRelations.Relation {
-		for idx, i := range data {
+	for idx, data := range detailsPageRelations.Relation { // since detailsPageRelations is a map idx is the location and data is the dates for each location
+		for idx, i := range data { // i represents each single date and idx is its index
 			if idx == 0 {
-				dates = dates + i
+				dates = dates + i  // the array of dates is converted to a string with the dates seperated by a coma
 			}else{
-			dates = i + ", " + dates
+			dates = i + ", " + dates 
 			}
-		}
-		idx = strings.ReplaceAll(idx, "-", ", ")
+		}// the following three lines are used to better represent each location
+		idx = strings.ReplaceAll(idx, "-", ", ") 
 		idx = strings.ReplaceAll(idx, "_", " ")
 		idx = strings.Title(idx)
  		oneDateandLocation = idx + ": " + dates
-		dateAndLocation = append(dateAndLocation, oneDateandLocation)
+		dateAndLocation = append(dateAndLocation, oneDateandLocation) // the dates and locations are appended into a single array of string
 		dates = ""
 	}
 	return (dateAndLocation)
