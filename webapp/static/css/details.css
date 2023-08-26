@@ -10,36 +10,34 @@ body {
     background-color: #000000; 
     padding: 10px 0;
 }
+.cool-header a {
+  text-decoration: none;
+  color: inherit;
+}
 /*check box expands when clicked but kept hidden*/
+.container {
+  display: flex;
+  text-align: center;
+}
+.l-col {
+  width: 50%;
+}
+.r-col {
+  flex-grow: 1;
+}
 input[type="checkbox"] {  
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 10%;
-  height: 10%;
   opacity: 0;
 }
-h5 {
-  max-height: 0;
-  overflow: hidden;
-  padding-left: 30px;
-  transition: 0.2s ease;
-  border-radius: 8px;
-  text-align: center;
-  font-size: 48px;
-  font-weight: bolder;
-}
 input[type="checkbox"]:checked ~ h3 ~ h5 {
-  max-height: 2000px;
+  min-height: fit-content;
+  align-items:baseline;
 }
 label {
   background: #282828;
   text-align: center; 
-    padding: 10px;
-    font-size: 40px;
-    font-weight: 500;
-    border-radius: 8px;
-    cursor: pointer;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
 }
 label:hover{
   color:#282828;
@@ -48,4 +46,13 @@ label:hover{
 label:active{
   opacity: 0.5;
   transition: 0.2s;
+}
+h5 {
+  overflow: hidden;
+  max-height: 0;
+  transition: 0.2s ease;
+  display:inline-block;
+  text-align: left;
+  align-self:initial;
+  line-height: 1.5em;
 }
