@@ -1,29 +1,24 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <title>Groupie</title>
-    <link rel="stylesheet" type="text/css" href="./css/base.css">
-</head>
-
-<body>
-    <header class="cool-header">
-        <h1>Groupie Tracker</h1>
-    </header>
-    <main class="artists-container">
-        {{range .}}
-        <!-- range over APIcall to get present the name and images -->
-        <a href="/details?id={{.Id}}" class="artist-card">
-            <!-- the a command turns the image along with the name to a url that is clickable -->
-            <div class="artist-image">
-                <img src="{{.Image}}" alt="{{.Name}}">
-            </div>
-            <div class="artist-info">
-                {{.Name}}
-            </div>
-        </a>
-        {{end}}
-    </main>
-</body>
-
+    <head>
+        <title>Groupie</title>
+        <link rel="stylesheet" href="/css/base.css">
+    </head>
+    <body>
+        <div class="cool-header">
+            <h1>Groupie Tracker</h1>
+        </div>
+        <div class="artists-container">
+            {{range .}} <!-- range over APIcall to get present the name and images -->
+            <a href="/details?id={{.Id}}" class="artist-card"> <!-- the a tag turns the image along with the name to a url that is clickable -->
+                <div class="artist-image">
+                    <img src="{{.Image}}" alt="{{.Name}}">
+                </div>
+                <div class="artist-info">
+                    {{.Name}}
+                </div>
+            </a>
+            {{end}}
+        </div>
+    </body>
 </html>
