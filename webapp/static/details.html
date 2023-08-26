@@ -22,7 +22,14 @@
           <input type="checkbox" id="mem">  
           <h3><label for="mem">Artist/s</label></h3>
           <h5>{{range .Member}}{{.}}<br>{{end}}</h5>  
-        </div>
+          <div>
+          <div>
+              <input type="checkbox" id="rel">
+              <h3><label for="rel">Concerts</label></h3>
+              <h5>{{range .Relations}}{{.}}<br>{{end}}</h5>
+          </div>
+</div>
+      </div>
         <!--<div>
           <input type="checkbox" id="cre">
           <h3><label for="cre">Creation Date</label></h3>
@@ -35,21 +42,16 @@
         </div> -->
       </div>
       <div class="r-col">
-        <!--<div>
-          <input type="checkbox" id="loc">
-          <h3><label for="loc">Locations</label></h3>
-          <h5>{{range .Locations}}{{.}}<br>{{end}}</h5>
-        </div>
+      
         <div>
           <input type="checkbox" id="dat">
           <h3><label for="dat">Dates</label></h3>
           <h5>{{range .Dates}}{{.}}<br>{{end}}</h5>
-        </div> -->
-        <div>
-          <input type="checkbox" id="rel">
-          <h3><label for="rel">Concerts</label></h3>
-          <h5>{{range .Relations}}{{.}}<br>{{end}}</h5>
         </div>
+        <input type="checkbox" id="loc">
+        <h3><label for="loc">Locations</label></h3>
+        <h5>{{range .Locations}}{{.}}<br>{{end}}</h5>
+      
       </div>
     </div>
   </body>

@@ -29,8 +29,9 @@ input[type="checkbox"] {
   opacity: 0;
 }
 input[type="checkbox"]:checked ~ h3 ~ h5 {
-  min-height: fit-content;
-  align-items:baseline;
+min-height: fit-content;
+  align-items:baseline; 
+  max-height: 2000px;
 }
 label {
   background: #282828;
