@@ -7,6 +7,15 @@ body {
     text-align: center;
     font-size: xx-large;
     border-radius: 8px;
-    background: #282828; /* Slightly lighter than body background */
     padding: 10px;
 }
+a {
+    background-color: #282828 ;
+    text-align: center; 
+    padding: 10px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
+  }
