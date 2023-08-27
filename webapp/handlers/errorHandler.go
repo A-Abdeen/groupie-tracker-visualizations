@@ -1,7 +1,6 @@
 package gt
 
 import (
-	"fmt"
 	API "gt/webapp/API"
 	"html/template"
 	"log"
@@ -9,7 +8,7 @@ import (
 )
 
 func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
-	fmt.Println("ErrorHandler is called.") // XXX
+	//fmt.Println("ErrorHandler is called.") // XXX
 	var errorMsg string
 	switch {
 	case statusCode == 400:
