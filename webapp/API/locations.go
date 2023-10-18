@@ -1,36 +1,31 @@
 package gt
+
 import (
 	"encoding/json"
-	"fmt"
 	"io"
-	"log"
 	"net/http"
-	"os"
-	"strings"
 )
-func Locations(idNumber int) []string{
-	fullJso, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
+
+func Locations(id int) ([]string, error) {
+	var locations []string
+	res, err := http.Get("https://groupietrackers.herokuapp.com/api/locations")
 	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
+		return locations, err
 	}
-	fullLocationspage, err := io.ReadAll(fullJso.Body)
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		return locations, err
 	}
-	var individualLocations TmpLocations //struct created to be able to unmarshal the full data for locations from above URL
-	err2 := json.Unmarshal(fullLocationspage, &individualLocations)
-	if err2 != nil {
-		fmt.Print(err2)
+	var concertLocations ConcertLocations //struct created to be able to unmarshal the full data for locations from above URL
+	if err := json.Unmarshal(body, &concertLocations); err != nil {
+		return locations, err
 	}
-	var locations []string // locations created so that to be able to add indivitualLocations to DisplayDetails 
-	detailsPageLocations := individualLocations.Index[idNumber]
-	for _, data := range detailsPageLocations.LocationsDetailed {
-		data = strings.ReplaceAll(data, "-", ", ")
-		data = strings.ReplaceAll(data, "_", " ")
-		data = strings.Title(data)
+	// locations created so that to be able to add indivitualLocations to DisplayDetails
+	artistConcertLocations := concertLocations.Index[id]
+	for _, data := range artistConcertLocations.LocationsDetailed {
+		data = LocationFmt(data)
 		locations = append(locations, data)
 	}
-	return (locations)
+	return locations, nil
 }
-

@@ -1,10 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>{{.Name}}</title>
       <link rel="stylesheet" href="/css/details.css"/>
+      <script>
+        (g => {
+          const h = window,
+            a = document,
+            k = "script",
+            p = "maps.googleapis.com",
+            c = "maps/api/js",
+            l = "version",
+            q = "weekly",
+            m = "client",
+            b = "channel",
+            d = "https://",
+            r = new Set(),
+            e = new URLSearchParams(location.search.slice(1));
+            apiKey = "{{.MapData.Key}}";
+  
+          const u = () =>
+            new Promise((f, n) => {
+              if (h.google && h.google.maps && h.google.maps.version >= q) return f();
+              const t = a.createElement(k);
+              t.type = "text/javascript";
+              t.src = `${d}${p}/${c}?${l}=${q}&${m}=${e.get(m)}&${b}=${e.get(b)}&callback=${g}`;
+              t.onerror = n;
+              a.head.appendChild(t);
+            });
+  
+          if (!h.google || !h.google.maps || h.google.maps.importLibrary) {
+            h.google = h.google || {};
+            h.google.maps = h.google.maps || {};
+            h.google.maps.importLibrary = (f, ...n) =>
+              r.add(f) && u().then(() => d[l](f, ...n));
+          }
+  
+          g({ key: apiKey, v: q });
+        });
+      </script>
+      <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
   </head>
   <body>
     <div class="cool-header">
@@ -23,26 +60,13 @@
           <h3><label for="mem">Artist/s</label></h3>
           <h5>{{range .Member}}{{.}}<br>{{end}}</h5>  
           <div>
-          <div>
               <input type="checkbox" id="rel">
               <h3><label for="rel">Concerts</label></h3>
               <h5>{{range .Relations}}{{.}}<br>{{end}}</h5>
           </div>
-</div>
-      </div>
-        <!--<div>
-          <input type="checkbox" id="cre">
-          <h3><label for="cre">Creation Date</label></h3>
-          <h5>{{.Creationdate}}<br></h5>
         </div>
-        <div>
-          <input type="checkbox" id="fir">
-          <h3><label for="fir">First Album</label></h3>
-          <h5>{{.FirstAlbum}}<br></h5>
-        </div> -->
       </div>
       <div class="r-col">
-      
         <div>
           <input type="checkbox" id="dat">
           <h3><label for="dat">Dates</label></h3>
@@ -51,8 +75,87 @@
         <input type="checkbox" id="loc">
         <h3><label for="loc">Locations</label></h3>
         <h5>{{range .Locations}}{{.}}<br>{{end}}</h5>
-      
       </div>
+    </div>
+    <div class="map-container">
+      <div id="map"></div>
+      <!-- prettier-ignore -->
+      <script data-prettier-ignore>
+        const apiKey = "{{.MapData.Key}}"
+        function loadMapScript() {
+          const script = document.createElement("script");
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+          script.async = true;
+          script.defer = true;
+          document.body.appendChild(script);
+        }
+        loadMapScript();
+
+        async function initMap() {
+          const { Map, InfoWindow } = await google.maps.importLibrary("maps");
+          const { AdvancedMarkerElement, PinElement } = await google.maps.importLibrary("marker",);
+          const map = new google.maps.Map(document.getElementById("map"), {
+            zoom: 2,
+            center: { lat: 26.201, lng: 50.606998 },
+            mapId: "f4a7fb98019ef9d8",
+          });
+          const pinScaled = new PinElement({
+            scale: 3,
+            background: "#dab744",
+            borderColor: "#282828",
+            glyphColor: "#dab744",
+          });
+          const infoWindow = new google.maps.InfoWindow({
+            content: "",
+            disableAutoPan: true,
+          });
+          var mapInfo = new Array();
+          var mapLabels = new Array();
+          var mapLocations = new Array();
+          var mapData = {
+            Locations: [
+              {{range .MapData.Locations}}
+              {
+                Name: "{{.Name}}",
+                Coordinates: {
+                  Lat: {{.Coordinates.Lat}},
+                  Lng: {{.Coordinates.Lng}}
+                },
+                Info: "{{.Info}}"
+              },
+              {{end}}
+            ]
+          };
+
+          mapData.Locations.forEach((location) => {
+            mapInfo.push(location.Info)
+            mapLabels.push(location.Name)
+            var temp = new google.maps.LatLng(location.Coordinates.Lat, location.Coordinates.Lng);
+            mapLocations.push(temp)
+          });
+
+          const markers = mapLocations.map((position, i) => {
+            const label = mapLabels[i];
+            const pinGlyph = new google.maps.marker.PinElement({
+              glyph: label,
+              glyphColor: "white",
+              scale: 3,
+              background: "#282828",
+              borderColor: "#dab744",              
+            });
+            const marker = new google.maps.marker.AdvancedMarkerElement({
+              position: position,
+              content: pinGlyph.element,
+            });
+            marker.addListener("click", () => {
+              infoWindow.setContent(mapInfo[i]);
+              infoWindow.open(map, marker);
+            });
+            return marker;
+          });
+          const markerCluster = new markerClusterer.MarkerClusterer({ map, markers });
+        }
+    </script>
     </div>
   </body>
 </html>

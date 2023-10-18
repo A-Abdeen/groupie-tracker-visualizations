@@ -3,6 +3,7 @@ package gt
 import (
 	"fmt"
 	API "gt/webapp/API"
+	"os"
 )
 
 /*
@@ -23,5 +24,12 @@ func Init() {
 		// Add new html / template names here
 	}
 	fmt.Println("Global Variable initialized") // XXX
-	APIcall = API.LoadArtist()                 //used to unmarshal full data into APIcall
+	// used to unmarshal full data into APIcall
+	firstCall, err := API.LoadArtist()
+	if err != nil {
+		fmt.Println("Initial API call failed. Terminating server.")
+		os.Exit(0)
+	} else {
+		APIcall = firstCall
+	}
 }

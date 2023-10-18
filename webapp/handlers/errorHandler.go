@@ -8,7 +8,6 @@ import (
 )
 
 func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
-	//fmt.Println("ErrorHandler is called.") // XXX
 	var errorMsg string
 	switch {
 	case statusCode == 400:
@@ -23,6 +22,8 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
 		errorMsg = "The Server Refuses The Attempt To Brew Coffee With A Teapot"
 	case statusCode == 500:
 		errorMsg = "Internal Server Error"
+	case statusCode == 503:
+		errorMsg = "API Service Unavailable"
 	default:
 		errorMsg = "UNFAMILIAR ERROR WHAT DIS :("
 	}
@@ -33,5 +34,4 @@ func ErrorHandler(w http.ResponseWriter, r *http.Request, statusCode int) {
 		log.Fatal(err)
 	}
 	t.ExecuteTemplate(w, "error.html", errorResponse)
-
 }

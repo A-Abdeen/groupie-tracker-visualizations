@@ -1,4 +1,7 @@
 body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
     background-color: #686868;
     text-align: center; 
     color: #dab744; 
@@ -19,6 +22,12 @@ body {
   display: flex;
   text-align: center;
 }
+.map-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
 .l-col {
   width: 50%;
 }
@@ -39,6 +48,7 @@ label {
   padding: 10px;
   border-radius: 8px;
   cursor: pointer;
+  color: #dab744;
 }
 label:hover{
   color:#282828;
@@ -56,4 +66,8 @@ h5 {
   text-align: left;
   align-self:initial;
   line-height: 1.5em;
+}
+#map {
+  width: 75%;
+  height: 75%;
 }

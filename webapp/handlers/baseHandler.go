@@ -7,7 +7,6 @@ import (
 )
 
 func BaseHandler(w http.ResponseWriter, r *http.Request) {
-	//fmt.Println("BaseHandler is called.") // XXX
 	// Verify Request Method
 	if r.Method != "GET" {
 		ErrorHandler(w, r, http.StatusMethodNotAllowed)

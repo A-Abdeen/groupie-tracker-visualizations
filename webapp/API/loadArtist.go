@@ -4,26 +4,22 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
-	"os"
 )
 
-func LoadArtist() []Artists {
-
-	fullJson, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
+func LoadArtist() ([]Artists, error) {
+	var artists []Artists //struct created to be able to unmarshal the full data
+	res, err := http.Get("https://groupietrackers.herokuapp.com/api/artists")
 	if err != nil {
-		fmt.Print(err.Error())
-		os.Exit(1)
+		return artists, err
 	}
-	fullArtistpage, err := io.ReadAll(fullJson.Body)
+	defer res.Body.Close()
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
-		log.Fatal(err)
+		return artists, err
 	}
-	var individualArtists []Artists //struct created to be able to unmarshal the full data for artists from above URL
-	err2 := json.Unmarshal(fullArtistpage, &individualArtists)
-	if err2 != nil {
+	if err := json.Unmarshal(body, &artists); err != nil {
 		fmt.Print("Hello, World! ") // Indicator of partial marshalling success
 	}
-	return individualArtists // variable has all the artists data to be displayed in the homepage
+	return artists, nil
 }
